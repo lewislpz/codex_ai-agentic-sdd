@@ -1,0 +1,51 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# Environment & secrets
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+*.ovpn
+
+# Logs / temp / cache
+*.log
+tmp/
+.cache/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Node cache
+node_modules/
+
+# Local databases
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+
+# Codex local state (sensitive)
+.codex/auth.json
+.codex/history.jsonl
+.codex/log/
+.codex/state_*.sqlite
+.codex/state_*.sqlite-shm
+.codex/state_*.sqlite-wal
+.codex/tmp/
+.codex/sessions/
+.codex/shell_snapshots/
+
+# Orchestrator runtime artifacts
+.orchestrator/
+
+# Build outputs
+dist/
+build/
+coverage/
