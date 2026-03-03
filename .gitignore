@@ -41,6 +41,7 @@ node_modules/
 .codex/tmp/
 .codex/sessions/
 .codex/shell_snapshots/
+.codex/config.toml
 
 # Orchestrator runtime artifacts
 .orchestrator/
