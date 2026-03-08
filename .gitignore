@@ -42,6 +42,7 @@ node_modules/
 .codex/sessions/
 .codex/shell_snapshots/
 .codex/config.toml
+.code/tmp/models_cache.json
 
 # Orchestrator runtime artifacts
 .orchestrator/
