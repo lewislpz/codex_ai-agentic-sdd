@@ -52,4 +52,6 @@ dist/
 build/
 coverage/
 .codex/version.json
-.codex/skills/.system/
+.codex/skills/.system/.codex-system-skills.marker
+.codex/skills/.system/slides/
+.codex/skills/.system/spreadsheets/
