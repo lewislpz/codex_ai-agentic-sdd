@@ -96,7 +96,7 @@ git add . && \
 git commit -m "$COMMIT_MSG"
 ```
 
-- If nothing to commit (all changes already committed via checkpoints) → Skip to Step 3.
+- If nothing to commit, skip to Step 3.
 
 ---
 

@@ -1,30 +1,27 @@
 ---
 name: parallel-orchestration
-description: Multi-agent coordination pattern. Use when a task requires multiple domain experts (Security + Architecture + Implementation) or when analyzing a complex system.
+description: Multi-agent coordination pattern for Codex-style repository work. Use when a task needs separate passes for architecture, security, implementation, or review.
 ---
 
 # Parallel Orchestration
 
 ## Overview
-
-This skill coordinates multiple specialized roles natively through Claude Code's agent system.
+Coordinate specialized passes when one perspective is not enough.
+Use parallel or staged analysis only when the task benefits from separation of concerns.
 
 ## Domain Teams
-
 | Team | Roles involved | Trigger |
 | :--- | :--- | :--- |
-| **New Feature** | `@architect` → `@doc-planner` → `@backend` | New business requirement |
-| **Security Audit** | `@architect` → `security-scanner` | New API or sensitive change |
-| **Doc Polish** | `@doc-planner` → `@architect` | Refactoring or public release |
+| New Feature | `@architect` -> `@doc-planner` -> implementation role | New repository behavior |
+| Security Audit | `@architect` -> security-focused reviewer | Sensitive change or publication review |
+| Doc Polish | `@doc-planner` -> `@architect` | Documentation cleanup or contract drift |
 
-## Sequential Chain Pattern
-
-1. **Explorer**: Map the current state.
-2. **Domain Experts**: Each analyzes from their perspective (Architecture, Security, Performance).
-3. **Synthesis**: Combine all outputs into a single Decision Record (ADR) or Implementation Plan.
+## Pattern
+1. Explorer maps the current state.
+2. Specialists review from their domain perspective.
+3. A final synthesis reconciles conflicts into one decision record or plan.
 
 ## Rules
-
-- **Context Passing**: Each agent must share its findings with the next one.
-- **Unified Output**: The final response must be a synthesis of all agent findings.
-- **Handoffs**: Clearly define what each agent is responsible for.
+- Keep handoffs explicit.
+- Keep outputs unified.
+- Do not duplicate context unless it changes the result.

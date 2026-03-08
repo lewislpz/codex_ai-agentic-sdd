@@ -1,24 +1,35 @@
 # Strict Domain Boundaries
 
 ## Purpose
-To ensure 100% adherence to Separation of Concerns and prevent context pollution or disastrous cross-layer modifications by an Agent operating under a specialized context.
+Prevent context pollution and cross-domain edits without an explicit handoff.
 
-## The Iron Rule
-**An agent acting under a specific role must NEVER touch code, configuration, or documentation belonging to another domain without explicit and documented authorization.**
+## Iron Rule
+An agent should stay within the domain implied by the active task and stack profile.
+If it must cross domains, it should do so deliberately and document why.
 
-## Domain Definitions & Forbidden Actions
+## Default Generic Profiles
+### `@architect`
+- Domain: `docs/`, `.codex/`, repository-level architecture, delivery rules, and enforcement design.
+- Avoid: implementation details that belong to stack-specific application code.
 
-### 1. The `@backend` Agent
-- **Domain**: `src/main/java/`, `src/main/resources/`, `pom.xml`, backend tests.
-- **Forbidden**: Cannot read, edit, or parse any `.ts`, `.tsx`, or `.css` files located in the frontend `/src` directory. Cannot modify `package.json`.
+### `@doc-planner`
+- Domain: `.orchestrator/plans/`, `docs/`, repository workflow design, and execution logs.
+- Avoid: unrelated application refactors.
 
-### 2. The `@frontend` Agent
-- **Domain**: `src/`, `package.json`, `tailwind.config.mjs`, frontend testing infra.
-- **Forbidden**: Cannot touch `.java`, `application.yml`, Dockerfiles, or anything related to the Spring Boot persistence and controller logic.
+### `@implementation`
+- Domain: only the files required by the active task and declared stack profile.
+- Avoid: broad repo-wide edits without plan coverage.
 
-### 3. The `@architect` Agent
-- **Domain**: `docs/`, `.codex/`, `docker-compose.yml`, cloud configuration.
-- **Forbidden**: Cannot make implementation-level code changes (like building a React component or a Java method algorithm). The architect specifies the design and creates the plan; implementation is delegated to frontend/backend roles.
+## Optional Stack-Specific Overlays
+Apply these only when the target repository declares the stack in `docs/architecture.md`.
+
+### Backend Overlay
+- Domain: server code, runtime config, persistence, and backend tests.
+- Avoid: frontend assets unless the task explicitly spans both sides.
+
+### Frontend Overlay
+- Domain: UI code, client state, styling, and frontend tests.
+- Avoid: backend code unless the task explicitly spans both sides.
 
 ## Error Prevention
-If an agent realizes it needs to modify a file outside its active domain, it MUST output a warning to the user and request a handover to the correct agent logic, rather than attempting to guess the syntax or architecture of a stack it hasn't loaded context for.
+If a task requires files outside the active domain, document the handoff or expand the plan before editing.
